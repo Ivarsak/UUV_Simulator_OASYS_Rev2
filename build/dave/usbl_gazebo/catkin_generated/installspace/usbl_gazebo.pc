@@ -1,0 +1,8 @@
+prefix=/home/ivar/uuv_ws/install
+
+Name: usbl_gazebo
+Description: Description of usbl_gazebo
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: roscpp gazebo_ros message_runtime

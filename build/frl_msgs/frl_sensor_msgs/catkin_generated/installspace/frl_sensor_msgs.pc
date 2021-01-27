@@ -1,0 +1,8 @@
+prefix=/home/ivar/uuv_ws/install
+
+Name: frl_sensor_msgs
+Description: Description of frl_sensor_msgs
+Version: 0.1.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

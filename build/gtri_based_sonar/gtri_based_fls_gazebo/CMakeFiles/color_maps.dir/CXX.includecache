@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ivar/uuv_ws/src/gtri_based_sonar/gtri_based_fls_gazebo/src/ColorMaps.cpp
+stdio.h
+-
+math.h
+-
+ColorMaps.h
+/home/ivar/uuv_ws/src/gtri_based_sonar/gtri_based_fls_gazebo/src/ColorMaps.h
+
+/home/ivar/uuv_ws/src/gtri_based_sonar/gtri_based_fls_gazebo/src/ColorMaps.h
+cv.h
+-
+highgui.h
+-
+opencv2/core/core.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+
+/usr/include/opencv/cv.h
+opencv2/core/core_c.h
+/usr/include/opencv/opencv2/core/core_c.h
+opencv2/imgproc/imgproc_c.h
+/usr/include/opencv/opencv2/imgproc/imgproc_c.h
+opencv2/photo/photo_c.h
+/usr/include/opencv/opencv2/photo/photo_c.h
+opencv2/video/tracking_c.h
+/usr/include/opencv/opencv2/video/tracking_c.h
+opencv2/objdetect/objdetect_c.h
+/usr/include/opencv/opencv2/objdetect/objdetect_c.h
+
+/usr/include/opencv/highgui.h
+opencv2/core/core_c.h
+/usr/include/opencv/opencv2/core/core_c.h
+opencv2/highgui/highgui_c.h
+/usr/include/opencv/opencv2/highgui/highgui_c.h
+

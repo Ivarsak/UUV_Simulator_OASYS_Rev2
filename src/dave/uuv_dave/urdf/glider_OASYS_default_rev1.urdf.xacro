@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+
+<robot name="glider_OASYS" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+  <xacro:arg name="debug" default="0"/>
+  <xacro:arg name="namespace" default="glider_OASYS"/>
+  <xacro:arg name="inertial_reference_frame" default="world"/>
+  <!-- Include the UUV macro file -->
+  <xacro:include filename="$(find uuv_dave)/urdf/glider_OASYS_moving_mass.xacro"/>
+  <!-- Create the glider_OASYS -->
+  <xacro:glider_OASYS
+    namespace="$(arg namespace)" 
+    debug="$(arg debug)"
+    inertial_reference_frame="$(arg inertial_reference_frame)"/>
+
+  <!-- Joint state publisher plugin -->
+  <xacro:default_joint_state_publisher namespace="$(arg namespace)" update_rate="50"/>
+</robot>

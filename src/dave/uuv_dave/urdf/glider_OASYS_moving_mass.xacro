@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- includes -->
+  <xacro:include filename="$(find uuv_descriptions)/urdf/common.urdf.xacro" />
+  <xacro:include filename="$(find uuv_dave)/urdf/sensor_snippets.xacro"/>
+  <xacro:include filename="$(find uuv_gazebo_ros_plugins)/urdf/snippets.xacro"/>  
+
+  <!-- Properties for the OASYS glider, see Table 1 in the report in Overleaf -->
+  <xacro:property name="mass" value="5.75" />
+ <xacro:property name="moving_mass" value="1.145" />
+  <xacro:property name="length" value="1.450" />
+  <xacro:property name="diameter" value="0.0775" />
+  <xacro:property name="radius" value="${diameter*0.5}" />
+  <xacro:property name="volume" value="0.0065" />
+  <xacro:property name="cog" value="-0.7 0 0" />
+  <xacro:property name="cob" value="0 0 0"/>
+  <xacro:property name="rho" value="1027.0" />
+
+  <xacro:property name="area" value="0.004155" />
+  <xacro:property name="length" value="1.450" />
+
+  <xacro:property name="namespace" value="glider_OASYS"/>
+  <xacro:property name="visual_mesh_file" value="file://$(find uuv_dave)/models/glider_slocum/mesh/AssemblyExternal.dae" />
+  <xacro:property name="collision_mesh_file" value="file://$(find uuv_dave)/models/glider_slocum/mesh/AssemblyExternal.dae" />
+ <xacro:property name="moving_mass_mesh_file" value="file://$(find uuv_dave)/models/glider_slocum/mesh/moving_mass2.dae" />
+ 
+<!-- Include baselink -->   
+  <xacro:macro name="glider_OASYS" params="namespace debug inertial_reference_frame">
+    <link name="${namespace}/base_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="${visual_mesh_file}" scale="1 1 1" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="${collision_mesh_file}" scale="1 1 1" />
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="${mass}"/>
+        <origin xyz="${cog}" rpy="0 0 0" />
+        <inertia ixx="832878.872" ixy="-488.959" ixz="-2.733" iyy="7467.393" iyz="50.498" izz="829675.627" />
+      </inertial>
+    </link>
+
+
+
+
+   <link name="${namespace}/moving_mass_link">
+      <visual>
+        <origin xyz="0.01 0 -0.03" rpy="0 0 1.57 " />
+        <geometry>
+          <mesh filename="${moving_mass_mesh_file}" scale="1 1 1" />
+        </geometry>
+      </visual>
+	<collision>
+        <origin xyz="0.01 0 -0.03" rpy="0 0 1.57" />
+        <geometry>
+          <mesh filename="${moving_mass_mesh_file}" scale="1 1 1" />
+        </geometry>
+      </collision>
+	<inertial>
+        <mass value="${moving_mass}" />
+        <origin xyz="0.01 0 -0.03" rpy="0 0 1.57" />
+        <inertia ixx="4020" ixy="2" ixz="1" iyy="4020" iyz="4" izz="535" />
+      </inertial>
+    </link>
+
+
+<!-- Prismatic joint for translating mass --> 
+    <joint name="${namespace}/moving_mass_joint" type="prismatic">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="${namespace}/base_link"/>
+      <child link="${namespace}/moving_mass_link"/>
+      <axis xyz="0 1 0" />
+      <limit effort="0.0001" velocity="0.0001" upper="0.2" lower="-0.2" />
+    </joint> 
+
+ <link name="${namespace}/rolling_mass_link">
+      <visual>
+        <origin xyz="0.01 0 -0.03" rpy="0 0 1.57 " />
+        <geometry>
+          <mesh filename="${moving_mass_mesh_file}" scale="1 1 1" />
+        </geometry>
+      </visual>
+	<collision>
+        <origin xyz="0.01 0 -0.03" rpy="0 0 1.57" />
+        <geometry>
+          <mesh filename="${moving_mass_mesh_file}" scale="1 1 1" />
+        </geometry>
+      </collision>
+	<inertial>
+        <mass value="${moving_mass}" />
+        <origin xyz="0.01 0 -0.03" rpy="0 0 1.57" />
+        <inertia ixx="4020" ixy="2" ixz="1" iyy="4020" iyz="4" izz="535" />
+      </inertial>
+    </link>
+
+
+ <!-- revolute joint for rolling mass--> 
+  <joint name="${namespace}/rolling_mass_joint" type="revolute">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="${namespace}/base_link"/>
+      <child link="${namespace}/rolling_mass_link"/>
+      <axis xyz="0 1 0" />
+      <limit effort="0.0001" velocity="0.0001" upper="1.57" lower="-1.57" />
+    </joint> 
+
+ </xacro:macro>
+  
+</robot>
+

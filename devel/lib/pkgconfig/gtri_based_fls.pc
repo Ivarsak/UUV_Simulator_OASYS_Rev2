@@ -1,0 +1,8 @@
+prefix=/home/ivar/uuv_ws/devel
+
+Name: gtri_based_fls
+Description: Description of gtri_based_fls
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

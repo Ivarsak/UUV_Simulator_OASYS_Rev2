@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+ 
+
+    <!-- standard glider : glider_OASYS -->
+    <include file="$(find uuv_dave)/launch/upload_glider_OASYS_rev1.launch">
+        <arg name="namespace" value="glider_OASYS"/>
+        <arg name="x" value="10"/>
+        <arg name="y" value="40"/>
+        <arg name="z" value="-50"/>
+	<arg name="pitch" value="-0.4"/>
+    </include>
+
+  <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find uuv_dave)/rviz/glider_OASYS.rviz"/>
+   
+</launch>

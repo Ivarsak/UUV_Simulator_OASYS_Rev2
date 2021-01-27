@@ -1,0 +1,8 @@
+prefix=/home/ivar/uuv_ws/devel
+
+Name: bathy_dave_plugin
+Description: Description of bathy_dave_plugin
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib -lgearth_dave_plugin -lbathy_dave_plugin
+Requires: 
